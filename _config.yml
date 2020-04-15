@@ -1,8 +1,9 @@
 theme: jekyll-theme-minimal
 
-title: Devosfernando
+title: Arquitecto de software (Master en cyberseguridad)
 logo: /badge/avatar.png
-description: Minimal is a theme for GitHub Pages.
-show_downloads: true
+description: Si lo piensas lo puedes hacer
+show_downloads: False
 google_analytics:
 theme: jekyll-theme-minimal
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "default", "dirt", "neon", "mint", "plum" "sunrise"

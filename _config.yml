@@ -1,13 +1,13 @@
 theme: jekyll-theme-minimal
 
-title: "Arquitecto de software (Master en cyberseguridad)"
+title: "Arquitecto de software"
 subtitle: "(Master en cyberseguridad)"
 show_downloads: False
 theme: jekyll-theme-minimal
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "default", "dirt", "neon", "mint", "plum" "sunrise"
 author:
   name     : "Luis Fernando Diaz Devos"
-  avatar   : "/badge/avatar.png"
+  avatar   : /badge/avatar.png
   bio      : "Profesional en Ingeniería de Sistemas, con Maestría en Ciberseguridad, altas destrezas en el área
               de infraestructura de redes y seguridad, capaz de elaborar y plantear estrategias de innovación,
               para automatización de procesos,"
@@ -15,7 +15,7 @@ author:
   links:
     - label: "Codewars"
       icon: "fas fa-code"
-      url: "https://www.codewars.com/users/katarsi?refreshed=true"
+      url: https://www.codewars.com/users/katarsi?refreshed=true
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/Devosfernando"

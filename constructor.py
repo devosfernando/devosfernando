@@ -1,23 +1,80 @@
-#Requeridos pip install beautifulsoup4
-import re
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+from datetime import date
+
+import cv2
 import json
+import shutil
 import requests
 from bs4 import BeautifulSoup
 
 
+# Descarga de imagenes
+def descarga_imagen(imagen, nombre):
+    if nombre != "json":
+        resp = requests.get(imagen, stream=True)
+        if resp.status_code == 200:
+                print(".\\badge\\" + str(nombre) + ".png")
+                with open(".\\badge\\" + str(nombre) + ".png.tmp", 'wb') as f:
+                    resp.raw.decode_content = True
+                    shutil.copyfileobj(resp.raw, f)
+                if os.path.isfile(".\\badge\\" + str(nombre) + ".png"):
+                    # Cargamos las dos imagenes para hacer las diferencias
+                    original = cv2.imread(".\\badge\\" + str(nombre) + ".png")
+                    image_to_compare = cv2.imread(".\\badge\\" + str(nombre) + ".png.tmp")
+                    # Calculamos la diferencia absoluta de las dos imagenes
+                    if original.shape == image_to_compare.shape:
+                        os.remove(".\\badge\\" + str(nombre) + ".png.tmp")
+                    else:
+                        origen = (directorio + "\\badge\\" + str(nombre) + ".png")
+                        destino = (directorio + "\\badge\\old\\" + str(nombre) + str(today) + ".png")
+                        shutil.copy(origen, destino)
+                        os.remove(".\\badge\\" + str(nombre) + ".png")
+                        os.rename(".\\badge\\" + str(nombre) + ".png.tmp", ".\\badge\\" + str(nombre) + ".png")
+                else:
+                    os.rename(".\\badge\\" + str(nombre) + ".png.tmp", ".\\badge\\" + str(nombre) + ".png")
+    else:
+        print("otro")
+
+
+# Ciclo de descarga de imagenes
+def ciclo_descarga_imagen(courses_json, flag, avatar, badge):
+    print("Descargando Badge")
+    descarga_imagen(courses_json, "json")
+    descarga_imagen(avatar, "avatar")
+    descarga_imagen(badge, "badge")
+    descarga_imagen(flag, "flag")
+
+
+# Recorte de variables
 def filtrado(buscar, dato):
     inicio = dato.find(buscar)
     corte = dato[inicio:len(dato)]
     fin = corte.find("\n")
-    corte2 = dato[inicio:inicio+fin-1]
+    corte2 = dato[inicio:inicio + fin - 1]
     valor = corte2.replace(buscar, "")
     resultado = corte2.replace(buscar, "")
+    # Eliminamos comillas de string
     if valor[0:1] == "'":
-        resultado =resultado[1:len(valor)-1]
+        resultado = resultado[1:len(valor) - 1]
     print("Corte desde inicio: " + str(inicio) + " hasta " + str(fin) + " corte " + str(resultado))
     return (resultado)
 
 
+# Variables de trabajo
+directorio = os.path.dirname(os.path.realpath(__file__))
+today = date.today()
+courses_json = ""
+username = ""
+avatar = ""
+badge = ""
+flag = ""
+#Creo directorios
+try:
+    os.makedirs(directorio + "\\badge\\old\\")
+except:
+    print("Directorio con historicos ya creado")
 # Estraemos un consumo Html del portal de platzi
 req = requests.get('https://platzi.com/@devosfernando/')
 # Pasamor el Html por el BeautifulSoup para obtener solo los script
@@ -43,6 +100,6 @@ for script in scripts:
             badge = filtrado("badge: ", script_evaluar_sub)
             flag = filtrado("flag: ", script_evaluar_sub)
             courses_json = json.loads(courses_test)
-            print(courses_json[0]["title"])
     contador = contador + 1
-
+# Llamamos al ciclo de descargas
+ciclo_descarga_imagen(courses_json, flag, avatar, badge)

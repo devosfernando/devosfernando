@@ -25,3 +25,21 @@ author:
     - label: "linkedin"
       icon: "fab fa-linkedin-in"
       url: "https://co.linkedin.com/in/devosfernando"
+feature_row:
+  - image_path: assets/images/ford-schem4.jpg
+    alt: "placeholder image 1"
+    title: "Theory"
+    excerpt: "The theory of thing"
+    url: "theory/intro"
+  - image_path: assets/images/nk-unsplash.jpg
+    image_caption: ""
+    alt: ""
+    title: "Use Cases"
+    excerpt: "The scenarios of things"
+    url: "usecases/list"
+    #btn_label: "Read More"
+    #btn_class: "btn--primary"
+  - image_path: assets/images/rp-unsplash.jpg
+    title: "Demos"
+    excerpt: "See some code in action"
+    url: "#demo-link"

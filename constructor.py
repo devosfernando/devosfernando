@@ -51,7 +51,7 @@ def ciclo_descarga_imagen(courses_json, flag, avatar, badge):
     descarga_imagen(badge, "badge")
     descarga_imagen(flag, "flag")
     for dato in courses_json:
-        descarga_imagen(dato["image"], dato["slug"])
+        descarga_imagen(dato["badge"], dato["slug"])
 
 
 # Recorte de variables

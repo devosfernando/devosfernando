@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import os
 from datetime import date
-import cv2
+import cv2 #pip install opencv-python
 import json
 import shutil
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup #pip3 install beautifulsoup4
 
 
 # Manejo de la descarga binaria
@@ -96,7 +96,11 @@ for script in scripts:
     script_evaluar = []
     # Recorremos el objeto para convertirlo a string dentro de un arreglo en script_evaluar
     for cadena in script[contador]:
-        script_evaluar.append(str(cadena))
+        print(type(cadena))  
+        try:
+            script_evaluar.append(str(cadena.encode("utf8")))
+        except:
+            print("An exception occurred: -> ")
     # Recorremos los datos del arreglo, ya que podemos tener nulos
     for script_evaluar_sub in script_evaluar:
         # Validamos si el dato tiene nuestra palabra de referencia username
